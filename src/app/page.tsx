@@ -1,9 +1,19 @@
+import CarCard from "@/Components/CarCard/CarCard";
 import CustomFilter from "@/Components/CustomFilter/CustomFilter";
 import Hero from "@/Components/Hero/Hero";
 import SearchBar from "@/Components/SearchBar/SearchBar";
+import { fetchCars } from "@/Util";
 
 
-export default function Home() {
+export default async function Home() {
+
+  const allCars = await fetchCars()
+
+  console.log(allCars);
+
+  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
+
+
   return (
     <>
       <div className="overflow-hidden">
@@ -18,11 +28,28 @@ export default function Home() {
           <div className='mt-12 w-full flex-between items-center flex-wrap gap-5'>
             <SearchBar />
 
-            <div className='home__filter-container'>
-              <CustomFilter /> 
-              {/* <CustomFilter title='fuel' options={fuels} />
-              <CustomFilter title='year' options={yearsOfProduction} /> */}
+            <div className='grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14'>
+              {/* <CustomFilter title='fuel' /> 
+              <CustomFilter title='year' />  */}
+
             </div>
+          </div>
+
+          {/* cars data  */}
+          <div>
+            {!isDataEmpty ? (
+              <section>
+                <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14">
+                  {
+                    allCars?.map((car, i) => (<CarCard key={i} car={car} />))
+                  }
+                </div>
+              </section>
+            ) : (
+              <div className="mt-16 flex justify-center items-center flex-col gap-2">
+                <h2> Opps No Result</h2>
+              </div>
+            )}
           </div>
         </div>
       </div>

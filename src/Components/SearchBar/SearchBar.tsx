@@ -1,8 +1,20 @@
+"use client"
+
+import { useState } from "react";
+import SearchMenuFecturer from "../SearchMenuFecturer/SearchMenuFecturer";
 
 export default function SearchBar() {
+
+    const [manufacturer, setManuFacturer] = useState("");
+
     return (
         <div>
-            SearchBar
+            
+            <SearchMenuFecturer
+                manufacturer={manufacturer}
+                setManuFacturer={setManuFacturer}
+
+            />
         </div>
     )
 }

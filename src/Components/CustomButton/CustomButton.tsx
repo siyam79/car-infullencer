@@ -10,7 +10,7 @@ export default function CustomButton({isDisable, btnType, buttonStyle, textStyle
             <button
                 disabled={isDisable}
                 type={btnType || "button"}
-                className={`custom-btn ${buttonStyle}`}
+                className={`${buttonStyle}`}
                 onClick={handleClick}
             >
                 <span className={`flex-1 ${textStyles}`}>{title}</span>
